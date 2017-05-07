@@ -34,7 +34,7 @@
         $(document).on('click', '.add', function(e){
             e.preventDefault();
             $.ajax({
-                url: 'http://localhost:9000',
+                url: '/',
                 type: "POST",
                 dataType: "json",
                 data: $('#dict').serialize(),
@@ -52,7 +52,7 @@
         $(document).on('click', '.del', function(e){
             e.preventDefault();
             $.ajax({
-                url: 'http://localhost:9000/delete/' + $('.del_term').val(),
+                url: '/delete/' + $('.del_term').val(),
                 type: "DELETE",
                 error: function(e) {
                     console.log(e);
