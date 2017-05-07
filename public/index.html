@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .box {
+        background-color: purple;
+        padding: 50px;
+        width: 700px;
+        height: 200px;
+    }
+    input[type=text] {
+        padding: 10px
+    }
+</style>
+<body>
+<div class="box">
+    <form action="/" method="post" id="dict">
+        <input type="text" placeholder="New term" name="term">
+        <input type="text" placeholder="New term" name="defined">
+        <input type="button" value="Add Term" class="add">
+    </form>
+    <br>
+    <form action="/" method="post" id="del">
+        <input type="text" placeholder="New term" name="del_term" class="del_term">
+        <input type="button" value="Delete" class="del">
+    </form>
+</div>
+<script src="jquery-3.2.1.min.js"></script>
+<script>
+    jQuery(document).ready(function($){
+        $(document).on('click', '.add', function(e){
+            e.preventDefault();
+            $.ajax({
+                url: 'http://localhost:9000',
+                type: "POST",
+                dataType: "json",
+                data: $('#dict').serialize(),
+                error: function(e) {
+                    console.log(e);
+                },
+                beforeSend: function(e) {
+                    console.log(e);
+                },
+                success: function(e) {
+                    console.log(e);
+                }
+            });
+        });
+        $(document).on('click', '.del', function(e){
+            e.preventDefault();
+            $.ajax({
+                url: 'http://localhost:9000/delete/' + $('.del_term').val(),
+                type: "DELETE",
+                error: function(e) {
+                    console.log(e);
+                },
+                beforeSend: function(e) {
+                    console.log(e);
+                },
+                success: function(e) {
+                    console.log(e);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
